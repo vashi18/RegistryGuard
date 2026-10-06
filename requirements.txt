@@ -1,0 +1,4 @@
+Flask>=3.0,<4
+psutil>=5.9,<7
+gunicorn>=22,<24
+pytest>=8,<9
