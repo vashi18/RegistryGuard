@@ -1,0 +1,8 @@
+{
+  "routes": [
+    {"path": "/", "title": "Overview"},
+    {"path": "/events", "title": "Event log"},
+    {"path": "/events/:id", "title": "Event detail"},
+    {"path": "/settings", "title": "Settings"}
+  ]
+}
