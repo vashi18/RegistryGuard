@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}RegistryGuard{% endblock %} · RegistryGuard</title>
+  <meta name="description" content="Endpoint telemetry and Windows Registry change monitoring console">
+  <link rel="icon" href="{{ url_for('static', filename='logo.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <a class="brand" href="{{ url_for('index') }}"><div class="brand-mark">⌁</div><div><strong>REGISTRYGUARD</strong><small>endpoint telemetry</small></div></a>
+    <div class="nav-label">Workspace</div>
+    <nav class="nav">
+      <a href="{{ url_for('index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}">◈ <span>Overview</span></a>
+      <a href="{{ url_for('events') }}" class="{% if request.endpoint in ('events','event_detail') %}active{% endif %}">▤ <span>Event log</span></a>
+      <a href="{{ url_for('settings') }}" class="{% if request.endpoint == 'settings' %}active{% endif %}">⚙ <span>Settings</span></a>
+    </nav>
+    <div class="rail-footer"><small>Operating mode</small><div class="mode"><span class="dot"></span>{{ app_mode }} ADAPTER</div></div>
+  </aside>
+  <div class="content">
+    <header class="topbar"><div><div class="eyebrow">Security operations console</div><h1>{% block page_heading %}Overview{% endblock %}</h1></div><div class="topbar-actions"><div class="pulse"><span class="dot"></span> telemetry online</div><span>UTC · {{ now().strftime('%H:%M') if now else '' }}</span></div></header>
+    <main class="main">
+      {% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}{% endwith %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
